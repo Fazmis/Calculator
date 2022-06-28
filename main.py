@@ -10,6 +10,7 @@ root.title('Calculator')
 root.resizable(width=False, height=False)
 root['bg'] = 'Black'
 entry = tkinter.Entry(root, font=('Times New Romance', 15), justify='right')
+entry.insert('end', '0')
 
 
 def create_digit_button(digit):
@@ -36,7 +37,10 @@ def c_action():
 def add_digit(num):
     value = entry.get()
     entry.delete(0, 'end')
-    value = value + num
+    if value != '0':
+        value = value + num
+    else:
+        value = num
     entry.insert('end', value)
 
 
@@ -57,10 +61,11 @@ def calc():
     value = entry.get()
     entry.delete(0, 'end')
     if value[-1] in '+-*/':
-        value = eval(value + value[:-1])
-    else:
-        value = eval(value)
-    entry.insert('end', value)
+        value = value + value[:-1]
+    try:
+        entry.insert('end', eval(value))
+    except (ZeroDivisionError, SyntaxError, NameError):
+        entry.insert('end', 'Ошибка!')
 
 
 entry.grid(row=0, columnspan=4, sticky='we', padx=5, pady=5)
