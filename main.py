@@ -11,7 +11,7 @@ def calc():
 
     if action in action_dict:
         print(f'Итого: {action_dict[action](num1, num2)}\n')
-        if input('Жми Q, чтобы завершить: ') in ['Q', 'q']:
+        if input('Жми Q, чтобы завершить: ') in ['Q', 'q', 'Й', 'й']:
             return
         else:
             calc()
