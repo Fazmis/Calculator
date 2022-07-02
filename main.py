@@ -37,10 +37,10 @@ def c_action():
 def add_digit(num):
     value = entry.get()
     entry.delete(0, 'end')
-    if value != '0':
-        value = value + num
-    else:
+    if value == '0' or value[:-1].isalpha():
         value = num
+    else:
+        value = value + num
     entry.insert('end', value)
 
 
